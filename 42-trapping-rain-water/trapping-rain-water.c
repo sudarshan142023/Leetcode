@@ -1,43 +1,39 @@
-int trap(int* height, int heightSize) {
+int trap(int* height, int n)
+{
+    if(n == 0)
+        return 0;
 
-   
-    int left=0;
-    int right=heightSize-1;
+    int leftMax[n];
+    int rightMax[n];
 
-    int r_max=0;
-    int l_max=0;
+    leftMax[0] = height[0];
 
-    int water=0;
-
-    while(left<right)
+    for(int i = 1; i < n; i++)
     {
-        if(height[left]<height[right])
-        {
-            if(height[left]>=l_max)
-            {
-                l_max=height[left];
-            }
-            else
-            water += l_max-height[left];
-
-            left++;
-        }
+        if(height[i] > leftMax[i-1])
+            leftMax[i] = height[i];
         else
-        {
-            if(height[right]>=r_max)
-            {
-                r_max = height[right];
-            }
-            else
-            {
-                water += r_max-height[right];
-            }
-            right--;
-
-        }
-
+            leftMax[i] = leftMax[i-1];
     }
-    return water;
 
-    
+    rightMax[n-1] = height[n-1];
+
+    for(int i = n-2; i >= 0; i--)
+    {
+        if(height[i] > rightMax[i+1])
+            rightMax[i] = height[i];
+        else
+            rightMax[i] = rightMax[i+1];
+    }
+
+    int water = 0;
+
+    for(int i = 0; i < n; i++)
+    {
+        int minHeight = (leftMax[i] < rightMax[i]) ? leftMax[i] : rightMax[i];
+
+        water += minHeight - height[i];
+    }
+
+    return water;
 }
