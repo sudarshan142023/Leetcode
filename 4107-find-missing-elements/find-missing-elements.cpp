@@ -6,7 +6,7 @@ public:
     int min = *min_element(nums.begin(),nums.end());
 
         
-        unordered_set<int> temp(nums.begin(),nums.end());
+        set<int> temp(nums.begin(),nums.end());
         vector<int> ans;
 
         for(int i=min+1; i<max; i++)
