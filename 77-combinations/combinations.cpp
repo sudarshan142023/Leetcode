@@ -1,7 +1,7 @@
 class Solution {
 public:
  vector<vector<int>> res;
-    void combi(int n,int k,vector<int>& current,vector<bool> used)
+    void combi(int n,int k,vector<int>& current,int start)
     {
         if(current.size()==k)
         {
@@ -10,17 +10,15 @@ public:
 
         }
 
-        for(int i=1; i<=n; i++)
+        for(int i=start; i<=n; i++)
         {
-            if(used[i-1]==false)
-            {
-                current.push_back(i);
-                used[i-1]=true;
+            current.push_back(i);
+               
 
-                combi(n,k,current,used);
+                combi(n,k,current,i+1);
 
                 current.pop_back();
-            }
+            
         }
     }
 
@@ -29,7 +27,7 @@ public:
         vector<int> current;
         vector<bool> used(n,false);
 
-        combi(n,k,current,used);
+        combi(n,k,current,1);
 
         return res;
     }
