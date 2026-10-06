@@ -24,8 +24,6 @@ public:
                 
             }
         }
-
-            
         int move=open.size()+close.size();
 
         return move;
