@@ -11,13 +11,13 @@ public:
             if(nums[i]==nums[i-1]+nums[i-2])
             {
                 count++;
-                if(count>m_count)
-                m_count=count;
             }
             else
             {
                 count=2;
             }
+
+            m_count=max(m_count,count);
 
         }
         return m_count;
